@@ -1,0 +1,44 @@
+//code based off demo by David A. Mellis and Tom Igoe which is in public domain 
+
+// pin number
+const int pingPin = 7;
+
+//serial communication set up
+void setup() {
+  Serial.begin(9600);
+}
+
+void loop() {
+  // varaibles
+  long duration, inches, cm;
+
+  // The PING))) is triggered by a HIGH pulse of 2 or more microseconds.
+  // Give a short LOW pulse beforehand to ensure a clean HIGH pulse:
+  pinMode(pingPin, OUTPUT);
+  digitalWrite(pingPin, LOW);
+  delayMicroseconds(2);
+  digitalWrite(pingPin, HIGH);
+  delayMicroseconds(5);
+  digitalWrite(pingPin, LOW);
+
+  // The same pin is used to read the signal from the PING))): a HIGH
+  // pulse whose duration is the time (in microseconds) from the sending
+  // of the ping to the reception of its echo off of an object.
+  pinMode(pingPin, INPUT);
+  duration = pulseIn(pingPin, HIGH);
+  
+  //set device 5 cenimeters away from skin, so calculate velocity 
+  velocity = 5/duration
+  
+  //if velocity in x range, its muscle so turn on a blue light 
+  //if velocity in y range, its blood so turn on a red light 
+
+  Serial.print(duration);
+  Serial.print("microseconds, ");
+  Serial.print(velocity);
+  Serial.print("micrometers/s");
+  Serial.println();
+
+  delay(100);
+}
+
